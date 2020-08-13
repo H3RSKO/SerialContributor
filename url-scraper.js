@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const puppeteer = require('puppeteer');
+const puppeteerExtra = require('puppeteer-extra');
+const pluginStealth = require('puppeteer-extra-plugin-stealth');
 const Repo = require('./backend/db')
 
 
@@ -9,7 +10,7 @@ let startingUrl = "https://github.com/search?q=stars%3A%3E100&s=stars&type=Repos
 // need to track where each run ends to start the next run
 let endingUrl = ""
 let runs = 1
-const repoUrls = []
+export const repoUrls = []
 
 // can only run consecutively 3 times before being shut down by github
 const pageScraper = (currentUrl) => {
@@ -34,10 +35,13 @@ const pageScraper = (currentUrl) => {
   .catch(console.error)
 }
 
+// allows us to bypass scraping restrictions
+puppeteerExtra.use(pluginStealth());
+
 // navigate between pages
 const navigator = (currentUrl) => {
     runs ++
-    puppeteer
+    puppeteerExtra
       .launch({headless: false})
       .then(browser => browser.newPage())
       .then( async page => {
@@ -45,10 +49,12 @@ const navigator = (currentUrl) => {
         await page.tap('.next_page')
         let pageUrl = page.url()
         if(runs < 4) {
+          await page.waitFor(1709);
           pageScraper(pageUrl)
+          await browser.close();
         } else {
           console.log("Max number of runs reached")
-          await browser.close()
+          await page.close();
           endingUrl = currentUrl
         }
       })
