@@ -2,18 +2,15 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const puppeteerExtra = require('puppeteer-extra');
 const pluginStealth = require('puppeteer-extra-plugin-stealth');
-const Repo = require('./backend/db')
-
-
-let startingUrl = "https://github.com/search?q=stars%3A%3E100&s=stars&type=Repositories"
+const  readmePageScraper = require('./readme_scraper')
 
 // need to track where each run ends to start the next run
-const endingUrl = ""
+let endingUrl = ""
 let runs = 1
 const repoUrls = []
 
 // can only run consecutively 3 times before being shut down by github
-const pageScraper = (currentUrl) => {
+const urlPageScraper = (currentUrl) => {
   axios(currentUrl)
   .then(response => {
     const html = response.data;
@@ -29,7 +26,6 @@ const pageScraper = (currentUrl) => {
       const fullUrl = 'github.com' + url
       repoUrls.push(fullUrl)
     })
-    console.log(repoUrls)
     navigator(currentUrl)
   })
   .catch(console.error)
@@ -39,33 +35,38 @@ const pageScraper = (currentUrl) => {
 puppeteerExtra.use(pluginStealth());
 
 // navigate between pages
-const navigator = (currentUrl) => {
+const navigator = async (currentUrl) => {
     runs ++
-    puppeteerExtra
-      .launch({headless: false})
-      .then(browser => browser.newPage())
-      .then( async page => {
-        await page.goto(currentUrl, {waitUntil: 'networkidle2'})
-        await page.tap('.next_page')
-        let pageUrl = page.url()
-        if(runs < 4) {
-          await page.waitFor(1709);
-          pageScraper(pageUrl)
+    try {
+      const browser = await puppeteerExtra.launch({headless: false})
+      const page = await browser.newPage()
+      await page.goto(currentUrl, {waitUntil: 'networkidle2'})
+      await page.tap('.next_page')
+      let pageUrl = page.url()
+      if(runs < 4) {
+        await page.waitFor(1709);
+        console.log('> Navigating to next page')
+        urlPageScraper(pageUrl)
+        await browser.close();
+      } else {
+          console.log(">> Max number of runs reached")
           await browser.close();
-        } else {
-          console.log("Max number of runs reached")
-          await page.close();
           endingUrl = currentUrl
-        }
-      })
+          console.log(">> Initiating Readme scrape")
+          repoUrls.forEach(url => {
+            readmePageScraper('https://'+url)
+          })
+          console.log('>> Done')
+          return
+      }
+      } catch(error) {console.error}
+
   }
-
-
-pageScraper(startingUrl)
 
 module.exports = {
   endingUrl,
   repoUrls,
-  pageScraper,
+  urlPageScraper,
   navigator,
 }
+

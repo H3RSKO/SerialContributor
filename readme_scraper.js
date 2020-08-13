@@ -1,13 +1,9 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const Repo = require('./backend/db')
-// const {repoUrls, endingUrl} = require('./url-scraper')
 
 
-const testUrl = 'https://github.com/freeCodeCamp/freeCodeCamp'
-let runs = 1
-
-const pageScraper = (currentUrl) => {
+const readmePageScraper = (currentUrl) => {
   axios(currentUrl)
   .then(async response => {
     const html = response.data;
@@ -25,5 +21,4 @@ const pageScraper = (currentUrl) => {
 }
 
 
-pageScraper(testUrl)
-
+module.exports = readmePageScraper
