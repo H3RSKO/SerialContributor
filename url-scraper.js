@@ -8,9 +8,9 @@ const Repo = require('./backend/db')
 let startingUrl = "https://github.com/search?q=stars%3A%3E100&s=stars&type=Repositories"
 
 // need to track where each run ends to start the next run
-let endingUrl = ""
+const endingUrl = ""
 let runs = 1
-export const repoUrls = []
+const repoUrls = []
 
 // can only run consecutively 3 times before being shut down by github
 const pageScraper = (currentUrl) => {
@@ -63,3 +63,9 @@ const navigator = (currentUrl) => {
 
 pageScraper(startingUrl)
 
+module.exports = {
+  endingUrl,
+  repoUrls,
+  pageScraper,
+  navigator,
+}
