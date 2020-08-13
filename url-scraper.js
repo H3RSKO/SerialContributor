@@ -1,6 +1,8 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
+const Repo = require('./backend/db')
+
 
 let startingUrl = "https://github.com/search?q=stars%3A%3E100&s=stars&type=Repositories"
 
@@ -50,7 +52,6 @@ const navigator = (currentUrl) => {
           endingUrl = currentUrl
         }
       })
-
   }
 
 
