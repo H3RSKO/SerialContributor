@@ -47,6 +47,7 @@ const navigator = (currentUrl) => {
         } else {
           console.log("Max number of runs reached")
           await browser.close()
+          endingUrl = currentUrl
         }
       })
 
