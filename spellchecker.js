@@ -2,42 +2,66 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const puppeteerExtra = require('puppeteer-extra');
 const pluginStealth = require('puppeteer-extra-plugin-stealth');
+const readline = require('readline')
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 
 // blocks ads on jspell
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker')
 puppeteerExtra.use(AdblockerPlugin())
 
-puppeteerExtra.use(pluginStealth());
+// puppeteerExtra.use(pluginStealth());
 
-let spellcheckUrl = 'https://www.jspell.com/checker/'
+const spellcheckUrl = 'https://www.jspell.com/checker/'
 
 // navigate between pages
-const spellChecker = async (spellcheckUrl) => {
+const spellChecker = async (data) => {
     try {
       const browser = await puppeteerExtra.launch({headless: false})
       const page = await browser.newPage()
       await page.goto(spellcheckUrl, {waitUntil: 'networkidle2'})
-      // await page.tap('.next_page')
-      // let textArea = await page.waitFor('#pagetext');
-      await page.$eval('#pagetext', el => el.value = 'Adenosine triphospdadhate');
-      // await page.click('.btn btn-primary');
+      console.log('>>>>>>>>> , ', data)
+      let text = `url: ${data.url}. >>> ${data.readme}`
+      setTimeout(await page.$eval('#pagetext', (el, text) => {el.value = text}, text), 15000);
 
       } catch(error) {console.error}
 
   }
 
+
 const pullDBUrls = async () => {
-  try {
-    let urlList = await Repo.findAll()
-    resolve()
-    // urlList.forEach(e => console.log(e))
-    console.log(urlList[0])
 
+    let {data: urlList} = await axios.get('http://localhost:8080')
+    if (!urlList) console.log('no data')
 
-  } catch(error) {console.error}
+    let beggining = 0
+    let end = 3
+    let index = 0
+    const itterator = (list) => {list.forEach(async element => {
+      setTimeout(await spellChecker(element), 15000)
+      })
+    }
+
+    const tabOpener = () => {
+      let currentList = urlList.slice(beggining, end)
+      itterator(currentList)
+      beggining +=3
+      end +=3
+
+      rl.question('continue?', () => {
+        tabOpener()
+        rl.close();
+      })
+    }
+
+    tabOpener()
+
 }
 
 
-// spellChecker(spellcheckUrl)
-console.log(pullDBUrls())
+// spellChecker('dsdfasjfdjsdfjlasjfljdsafjladsjfladsj')
+pullDBUrls()
