@@ -12,10 +12,12 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
     "pg": "^8.3.0",
     "pg-hstore": "^2.3.3",
     "puppeteer": "^5.2.1",
     "puppeteer-extra": "^3.1.13",
+    "puppeteer-extra-plugin-adblocker": "^2.11.6",
     "puppeteer-extra-plugin-stealth": "^2.5.0",
     "sequelize": "^6.3.4"
   }

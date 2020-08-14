@@ -4,5 +4,6 @@
 {didn't work}
 3:x go to each url and pull readme
 4:x add url and readme to db
-5: itterate through all urls and add them to the db
+5:x itterate through all urls and add them to the db
+6: add all readmes in db to jspell and check for spelling errors
 

@@ -56,6 +56,7 @@ const navigator = async (currentUrl) => {
           repoUrls.forEach(url => {
             readmePageScraper('https://'+url)
           })
+          console.log(`>> Current URL: ${endingUrl}`)
           console.log('>> Done')
           return
       }
