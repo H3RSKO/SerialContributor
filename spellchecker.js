@@ -16,7 +16,7 @@ puppeteerExtra.use(AdblockerPlugin())
 
 // puppeteerExtra.use(pluginStealth());
 
-const spellcheckUrl = 'https://www.jspell.com/checker/'
+const spellcheckUrl = 'https://www.spellboy.com/check_spelling/'
 
 // navigate between pages
 const spellChecker = async (data) => {
@@ -24,13 +24,16 @@ const spellChecker = async (data) => {
       const browser = await puppeteerExtra.launch({headless: false})
       const page = await browser.newPage()
       await page.goto(spellcheckUrl, {waitUntil: 'networkidle2'})
-      console.log('>>>>>>>>> , ', data)
-      let text = `url: ${data.url}. >>> ${data.readme}`
-      setTimeout(await page.$eval('#pagetext', (el, text) => {el.value = text}, text), 15000);
+      let fixedReadme = data.readme.replace(/\./g, '. ')
+      let text = `url: ${data.url}. >>> ${fixedReadme}`
+      // let text = data
+      setTimeout(await page.$eval('.text', (el, text) => {el.value = text}, text), 15000);
+      await page.tap('.button')
 
       } catch(error) {console.error}
 
   }
+
 
 
 const pullDBUrls = async () => {
@@ -40,7 +43,6 @@ const pullDBUrls = async () => {
 
     let beggining = 0
     let end = 3
-    let index = 0
     const itterator = (list) => {list.forEach(async element => {
       setTimeout(await spellChecker(element), 15000)
       })
