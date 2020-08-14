@@ -11,11 +11,20 @@ const server = () => {
 }
 
 
-app.get('/', async (req, res, next) => {
+// app.get('/', async (req, res, next) => {
+//   try {
+//     const urlList = await Repo.findAll()
+//     res.json(urlList)
+//   }catch(err) {next(err)}
+// })
+
+app.get('/:id', async (req, res, next) => {
   try {
-    const urlList = await Repo.findAll()
-    res.json(urlList)
-  }catch(err) {next(err)}
+    const urlList = await Product.findByPk(req.params.id)
+    res.json(product)
+  } catch (error) {
+    next(error)
+  }
 })
 
 app.use((req, res, next) => {

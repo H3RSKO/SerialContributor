@@ -41,22 +41,22 @@ const pullDBUrls = async () => {
     let {data: urlList} = await axios.get('http://localhost:8080')
     if (!urlList) console.log('no data')
 
-    let beggining = 0
-    let end = 3
+    let beggining = 30
+    let end = 33
     const itterator = (list) => {list.forEach(async element => {
-      setTimeout(await spellChecker(element), 15000)
+      spellChecker(element)
       })
     }
 
     const tabOpener = () => {
-      let currentList = urlList.slice(beggining, end)
+      let currentList = urlList.filter(x => x.id > beggining && x.id < end + 1)
       itterator(currentList)
       beggining +=3
       end +=3
 
       rl.question('continue?', () => {
         tabOpener()
-        rl.close();
+
       })
     }
 
