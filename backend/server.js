@@ -1,5 +1,7 @@
-const router = require('express').Router()
-const Repo = require('./backend/db')
+// const router = require('express').Router()
+const Repo = require('./db')
+const express = require('express')
+const app = express();
 
 const server = () => {
   app.use(express.json())
@@ -9,14 +11,14 @@ const server = () => {
 }
 
 
-router.get('/', (req, res, next) => {
+app.get('/', async (req, res, next) => {
   try {
     const urlList = await Repo.findAll()
-    res.send(urlList)
+    res.json(urlList)
   }catch(err) {next(err)}
 })
 
-router.use((req, res, next) => {
+app.use((req, res, next) => {
   const error = new Error('Not Found')
   error.status = 404
   next(error)

@@ -20,6 +20,6 @@ const Repo = db.define('repo', {
   }
 })
 
-db.sync({force: true})
+db.sync()
 
 module.exports = Repo
