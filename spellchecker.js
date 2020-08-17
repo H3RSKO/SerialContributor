@@ -34,29 +34,28 @@ const spellChecker = async (data) => {
   }
 
 
+const itterator = async (id) => {
+  let {data} = await axios.get(`http://localhost:8080/${id}`)
+  if (!data) console.log(`ID: ${id} -- no data`)
+  else {spellChecker(data)}
+}
 
-  const itterator = async (id) => {
-    let {data} = await axios.get(`http://localhost:8080/${id}`)
-    if (!data) console.log(`ID: ${id} -- no data`)
-    else {spellChecker(data)}
-  }
-
-  let beggining = 658
-  let end = 61
+let beggining = 658
+let end = 661
 const tabOpener = () => {
-      let id = beggining
-      while(id < end) {
-        itterator(id)
-        console.log(id)
-        id++
-      }
-      beggining +=3
-      end +=3
+    let id = beggining
+    while(id < end) {
+      itterator(id)
+      console.log(id)
+      id++
+    }
+    beggining +=3
+    end +=3
 
-      rl.question('continue?', () => {
-        tabOpener()
+    rl.question('continue?', () => {
+      tabOpener()
 
-      })
+    })
 }
 
 tabOpener()

@@ -28,6 +28,7 @@ let logo = `
  ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═════╝  ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝ `
 
 console.log(logo)
+console.log('©️2020 By: Yosef Herskovitz')
 rl.question('Press any button to continue', () => {
   urlPageScraper(startingUrl)
   server()})
