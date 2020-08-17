@@ -14,7 +14,7 @@ const rl = readline.createInterface({
 const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker')
 puppeteerExtra.use(AdblockerPlugin())
 
-// puppeteerExtra.use(pluginStealth());
+puppeteerExtra.use(pluginStealth());
 
 const spellcheckUrl = 'https://www.spellboy.com/check_spelling/'
 
@@ -28,7 +28,6 @@ const spellChecker = async (data) => {
       let text = `url: ${data.url}. >>> ${fixedReadme}`
       // let text = data
       setTimeout(await page.$eval('.text', (el, text) => {el.value = text}, text), 15000);
-      await page.tap('.button')
 
       } catch(error) {console.error}
 
@@ -36,21 +35,21 @@ const spellChecker = async (data) => {
 
 
 
-const pullDBUrls = async () => {
+  const itterator = async (id) => {
+    let {data} = await axios.get(`http://localhost:8080/${id}`)
+    if (!data) console.log(`ID: ${id} -- no data`)
+    else {spellChecker(data)}
+  }
 
-    let {data: urlList} = await axios.get('http://localhost:8080')
-    if (!urlList) console.log('no data')
-
-    let beggining = 30
-    let end = 33
-    const itterator = (list) => {list.forEach(async element => {
-      spellChecker(element)
-      })
-    }
-
-    const tabOpener = () => {
-      let currentList = urlList.filter(x => x.id > beggining && x.id < end + 1)
-      itterator(currentList)
+  let beggining = 658
+  let end = 61
+const tabOpener = () => {
+      let id = beggining
+      while(id < end) {
+        itterator(id)
+        console.log(id)
+        id++
+      }
       beggining +=3
       end +=3
 
@@ -58,12 +57,6 @@ const pullDBUrls = async () => {
         tabOpener()
 
       })
-    }
-
-    tabOpener()
-
 }
 
-
-// spellChecker('dsdfasjfdjsdfjlasjfljdsafjladsjfladsj')
-pullDBUrls()
+tabOpener()

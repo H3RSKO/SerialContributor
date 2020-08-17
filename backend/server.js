@@ -20,8 +20,8 @@ const server = () => {
 
 app.get('/:id', async (req, res, next) => {
   try {
-    const urlList = await Product.findByPk(req.params.id)
-    res.json(product)
+    const repo = await Repo.findByPk(req.params.id)
+    res.json(repo)
   } catch (error) {
     next(error)
   }
