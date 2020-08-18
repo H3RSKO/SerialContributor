@@ -40,8 +40,8 @@ const itterator = async (id) => {
   else {spellChecker(data)}
 }
 
-let beggining = 658
-let end = 661
+let beggining = 775
+let end = 778
 const tabOpener = () => {
     let id = beggining
     while(id < end) {

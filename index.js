@@ -8,8 +8,8 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-//87
-let startingUrl = "https://github.com/search?p=87&q=stars%3A%3E100&s=stars&type=Repositories"
+//102
+let startingUrl = "https://github.com/search?p=102&q=stars%3A%3E100&s=stars&type=Repositories"
 
 
 let logo = `
