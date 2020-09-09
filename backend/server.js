@@ -6,7 +6,7 @@ const app = express();
 const server = () => {
   app.use(express.json())
 
-  app.listen(8080, () => console.log('Gator app listening on port 8080!'));
+  app.listen(8080, () => console.log('SerialContributor listening on Port 8080!'));
 
 }
 
