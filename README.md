@@ -1,7 +1,8 @@
-# SerialContributor
+<img alt="initialized" src="media/logo.png">
+
 A tool for helping the Opensource community!
 
-!! Requires Node and Postgres !!
+**!! Requires Node and Postgres !!**
 
 To get started clone this repo and run `npm install`
 
@@ -35,10 +36,10 @@ our databse (starting from the row id specified on line 43 of spellchecker.js), 
 
 It should look like this:
 
-4
-5
+<img alt="pulling-readmes" src="media/4.png">
+<img alt="pulling-readmes" src="media/5.png">
 
-Click the "check spelling and grammar" button on the bottom of the page, and the website will highlight any typos or grammatical errors!
+In the chromium window, click the "check spelling and grammar" button on the bottom of the page, and the website will highlight any typos or grammatical errors!
 
 When you are done scanning through a readme, just close the chromium window and move on to the next one. When all three are complete, just go back to the second tab
 and hit enter. It will then open the next three windows.
