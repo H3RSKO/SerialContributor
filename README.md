@@ -44,7 +44,7 @@ In the chromium window, click the "check spelling and grammar" button on the bot
 When you are done scanning through a readme, just close the chromium window and move on to the next one. When all three are complete, just go back to the second tab
 and hit enter. It will then open the next three windows.
 
-When you get to the end of all the readmes saved in the databse, your have completed your first SerialContributor run. Each run constists of 30 repo readmes.
+When you get to the end of all the readmes saved in the database, your have completed your first SerialContributor run. Each run constists of 30 repo readmes.
 
 To start the next run:
 
@@ -53,10 +53,12 @@ To start the next run:
 2) Edit the starting URL in index.js (line 13). You need to change the first number in the url (`...search?p=1...`) and add 3 to it. For the second run,
 `https://github.com/search?p=1&q=stars%3A%3E100&s=stars&type=Repositories` becomes `https://github.com/search?p=4&q=stars%3A%3E100&s=stars&type=Repositories`.
 
-3) In spellchecker.js, change the begining variable on line 43. This is where your spellchecking function will begin iterating through your readmes. It should increase
+3) In spellchecker.js, change the beginning variable on line 43. This is where your spellchecking function will begin iterating through your readmes. It should increase
 by 30 every run as that is how many readmes we add to to our database in each run.
 
 Once this is done, you can begin your second run by running `yarn start`.
+
+When you encounter a typo, go to the project repo that contains the error,
 
 
 
