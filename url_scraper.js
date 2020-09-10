@@ -31,8 +31,14 @@ const urlPageScraper = (currentUrl) => {
   .catch(console.error)
 }
 
-// allows us to bypass scraping restrictions
+// trying to minimize github scraping restrictions
 puppeteerExtra.use(pluginStealth());
+
+const between = (min, max) => {
+  return Math.floor(
+    Math.random() * (max - min) + min
+  )
+}
 
 // navigate between pages
 const navigator = async (currentUrl) => {
@@ -54,7 +60,7 @@ const navigator = async (currentUrl) => {
           endingUrl = currentUrl
           console.log(">> Initiating Readme scrape")
           repoUrls.forEach(url => {
-            readmePageScraper('https://'+url)
+            setTimeout(() => readmePageScraper('https://'+url), between(750, 1750))
           })
           console.log(`>> Current URL: ${endingUrl}`)
           console.log('>> Done')

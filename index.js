@@ -8,8 +8,9 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-//102
-let startingUrl = "https://github.com/search?p=102&q=stars%3A%3E100&s=stars&type=Repositories"
+// you need to manually iterate this url (the number by the first p={num}) by 3 after every pass.
+// so starting url "https://github.com/search?p=1&q=stars%3Aetc..." becomes "https://github.com/search?p=4&q=stars%3Aetc..."
+let startingUrl = "https://github.com/search?p=1&q=stars%3A%3E100&s=stars&type=Repositories"
 
 
 let logo = `
