@@ -41,6 +41,10 @@ It should look like this:
 
 In the chromium window, click the "check spelling and grammar" button on the bottom of the page, and the website will highlight any typos or grammatical errors!
 
+-- Note --
+The first thing listed in the spellchecker is the project's github url.
+`url: https://github.com/996.ICU`. This gives quick access if you want to double check a typo or navigate to their page to correct one.
+
 When you are done scanning through a readme, just close the chromium window and move on to the next one. When all three are complete, just go back to the second tab
 and hit enter. It will then open the next three windows.
 
@@ -58,7 +62,27 @@ by 30 every run as that is how many readmes we add to to our database in each ru
 
 Once this is done, you can begin your second run by running `yarn start`.
 
-When you encounter a typo, go to the project repo that contains the error,
+## When you encounter a typo:
+ Go to the github page for the project repo that contains the error and navigate to the readme file.
+
+ <img alt="pulling-readmes" src="media/readme.png">
+
+ After opening up the readme, click on the 'pencil' button on the top right to begin editing it.
+
+ <img alt="pulling-readmes" src="media/pencil.png">
+
+ Github will automatically create a fork of this project for the pull request.
+
+ <img alt="pulling-readmes" src="media/auto-fork.png">
+
+ Fix the typo then navigate to the bottom of the page and name your commit along with a brief description of what you fixed.
+
+  <img alt="pulling-readmes" src="media/propsed-changes.png">
+
+  Click on the Propose Changes button and that's it!
+
+  You've made a pull request!
+
 
 
 
