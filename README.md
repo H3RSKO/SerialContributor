@@ -11,27 +11,27 @@ Run `npm start`, and the program will start up.
 
 You should see something like this:
 
-
+<img alt="initialized" src="media/initialized.png">
 
 Click any button to continue.
 
-When you click a button, several things happen. SerialContributor pulls all 10 repo links from the startingUrl as defined in index.js line 12 and saves them 
-to the serialcontributor database that we created earlier. It then opens the page in a chromium window, and uses the open window to navigate to the next page. It 
-repeats itself 3 times, downloading all the urls to the database and then navigating to the next page.  
+When you click a button, several things happen. SerialContributor pulls all 10 repo links from the startingUrl as defined in index.js line 12 and saves them
+to the serialcontributor database that we created earlier. It then opens the page in a chromium window, and uses the open window to navigate to the next page. It
+repeats itself 3 times, downloading all the urls to the database and then navigating to the next page.
 
 Your console should look something like this:
 
-
+<img alt="pulling-readmes" src="media/pulling-readmes.png">
 
 Note: While SerialContributor is designed to bypass github's scraping restrictions, we still may get the occasional ECONNRESET error or githhub's scraping protection
 error. While these are not a problem overall and you can just skip the repos that weren't downloaded, I recommend using a VPN which should lower the amount of repos
 getting blocked.
 
-When the code has stopped running, open a new terminal (keep the first terminal open! This is running our server and allows us to communicate with the database). 
+When the code has stopped running, open a new terminal (keep the first terminal open! This is running our server and allows us to communicate with the database).
 I use the terminal in vs code as we don't need a large window for the next step.
 
-In the new terminal, run `node spellchecker.js`. This will open a spellchecking website in 3 new chromium windows, and then take 3 repo readmes that we have saved in 
-our databse (starting from the row id specified on line 43 of spellchecker.js), and then populate them into the spellchecker. 
+In the new terminal, run `node spellchecker.js`. This will open a spellchecking website in 3 new chromium windows, and then take 3 repo readmes that we have saved in
+our databse (starting from the row id specified on line 43 of spellchecker.js), and then populate them into the spellchecker.
 
 It should look like this:
 
@@ -40,16 +40,16 @@ It should look like this:
 
 Click the "check spelling and grammar" button on the bottom of the page, and the website will highlight any typos or grammatical errors!
 
-When you are done scanning through a readme, just close the chromium window and move on to the next one. When all three are complete, just go back to the second tab 
-and hit enter. It will then open the next three windows. 
+When you are done scanning through a readme, just close the chromium window and move on to the next one. When all three are complete, just go back to the second tab
+and hit enter. It will then open the next three windows.
 
 When you get to the end of all the readmes saved in the databse, your have completed your first SerialContributor run. Each run constists of 30 repo readmes.
 
 To start the next run:
 
-1) Close the first terminal that was running the server. You can do this with `cntrl + c` 
+1) Close the first terminal that was running the server. You can do this with `cntrl + c`
 
-2) Edit the starting URL in index.js (line 13). You need to change the first number in the url (`...search?p=1...`) and add 3 to it. For the second run, 
+2) Edit the starting URL in index.js (line 13). You need to change the first number in the url (`...search?p=1...`) and add 3 to it. For the second run,
 `https://github.com/search?p=1&q=stars%3A%3E100&s=stars&type=Repositories` becomes `https://github.com/search?p=4&q=stars%3A%3E100&s=stars&type=Repositories`.
 
 3) In spellchecker.js, change the begining variable on line 43. This is where your spellchecking function will begin iterating through your readmes. It should increase
