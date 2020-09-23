@@ -16,7 +16,7 @@ You should see something like this:
 
 Click any button to continue.
 
-When you click a button, several things happen. SerialContributor pulls all 10 repo links from the startingUrl as defined in index.js line 12 and saves them
+When you click a button, several things happen. SerialContributor pulls all 10 repo links from the [startingUrl](https://github.com/search?p=1&q=stars%3A%3E100&s=stars&type=Repositories) as defined in index.js line 12 and saves them
 to the serialcontributor database that we created earlier. It then opens the page in a chromium window, and uses the open window to navigate to the next page. It
 repeats itself 3 times, downloading all the urls to the database and then navigating to the next page.
 
