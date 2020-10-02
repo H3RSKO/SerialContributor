@@ -8,6 +8,8 @@ To get started clone this repo and run `npm install`
 
 Create a new postgres db called `serialcontributor`. If you have the postgres cli commands installed you can do this by running `createdb serialcontributor`.
 
+Make sure Postgres is running on your computer.
+
 Run `npm start`, and the program will start up.
 
 You should see something like this:
